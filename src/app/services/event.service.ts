@@ -8,9 +8,8 @@ import { Event } from '../models/Event.model';
   providedIn: 'root'
 })
 export class EventService {
-
   events: Event[] = EVENTS;
-  sendCurrentNumberPage: Subject<number> = new Subject() ;
+  sendCurrentNumberPage: Subject<number> = new Subject();
 
   constructor() { }
 
@@ -42,4 +41,5 @@ export class EventService {
   paginate(start: number, end: number): Event[] {
     return this.events.slice(start, end);
   }
+
 }

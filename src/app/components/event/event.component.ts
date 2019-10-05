@@ -34,7 +34,6 @@ export class EventComponent implements OnInit {
 
   // EVENTS
   onSelect(event: Event) {
-    // On crée un nouvel objet par rapport à l'objet album initial que l'on passe dans le select
     this.selectedEvent = { ...event };
   }
 
@@ -55,14 +54,14 @@ export class EventComponent implements OnInit {
     this.isSearch = true;
   }
 
-  // reload propre à ce component
   reload() {
+    // reload propre à ce component
     this.events = this.eventS.paginate(0, this.perPage);
     this.isSearch = false;
   }
 
-  // reload déclenché à partir d'un événement de l'enfant
   relaodParent($event: boolean) {
+    // reload déclenché à partir d'un événement de l'enfant
     this.isSearch = false;
     this.events = this.eventS.paginate(0, this.perPage);
   }
@@ -76,6 +75,7 @@ export class EventComponent implements OnInit {
   get f() {
     return this.EventForm.controls;
   }
+  
   get t() {
     return this.f.tickets as FormArray;
   }
