@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <img
+    id="navbar-image-logo"
+    width="40"
+    alt="Martinu's Logo"
+    src="../../assets/images/Logo MArtinu's RVB.svg"
+  />
+  <a class="navbar-brand" routerLink="/home">Martinu's Man-Elende</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/home" routerLinkActive="active">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/about" routerLinkActive="active">À propos <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/event" routerLinkActive="active">Évènements <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/partner" routerLinkActive="active">Partenaires <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" routerLink="/contact" routerLinkActive="active">Contact <span class="sr-only">(current)</span></a>
+        </li>
+    </ul>
+    <span class="navbar-text">
+      {{baseline}}
+    </span>
+  </div>
+</nav>

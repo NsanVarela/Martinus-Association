@@ -1,0 +1,17 @@
+.navbar {
+  height: 60px;
+  // margin: -8px;
+  display: flex;
+  align-items: center;
+  background-color: lightgray!important;
+  color: white;
+  font-weight: 600;
+  width: 100%;
+  z-index: 10;
+  position: fixed;
+  top: 0;
+}
+
+.navbar #navbar-image-logo {
+  margin: 0 16px;
+}
