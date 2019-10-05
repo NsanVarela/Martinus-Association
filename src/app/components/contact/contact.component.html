@@ -1,1 +1,82 @@
-<p>contact works!</p>
+<div class="container">
+    <!-- <form id="event-form" [formGroup]="EventForm" (ngSubmit)="onSubmit()">
+        <div class="card m-2 shadow">
+            <h5 class="card-header">Réservation</h5>
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nombre de ticket(s)</label>
+                        <select formControlName="numberOfTickets" class="form-control" (change)="onChangeTickets($event)" [ngClass]="{ 'is-invalid': submitted && f.numberOfTickets.errors }">
+                            <option value=""></option>
+                            <option *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">{{i}}</option>
+                        </select>
+                        <div *ngIf="submitted && !!f.numberOfTickets.errors" class="invalid-feedback">
+                            <div *ngIf="!!f.numberOfTickets.errors.required">Le nombre de ticket(s) requis</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngFor="let ticket of t.controls; let i = index" class="list-group list-group-flush">
+                <div class="list-group-item">
+                    <h5 class="card-title">Ticket n° {{i + 1}}</h5>
+                    <div [formGroup]="ticket" class="form-row">
+                        <div class="form-group col-6">
+                            <label>Nom</label>
+                            <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && ticket.controls.name.errors }" />
+                            <div *ngIf="submitted && !!ticket.controls.name.errors" class="invalid-feedback">
+                                <div *ngIf="!!ticket.controls.name.errors.required">Le nom requis</div>
+                            </div>
+                        </div>
+                        <div class="form-group col-6">
+                            <label>Email</label>
+                            <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && ticket.controls.email.errors }" />
+                            <div *ngIf="submitted && !!ticket.controls.email.errors" class="invalid-feedback">
+                                <div *ngIf="!!ticket.controls.email.errors.required">L'email est requis</div>
+                                <div *ngIf="!!ticket.controls.email.errors.email">L'email doit être une adresse email valide</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-center">
+                <button class="btn btn-primary mr-1">Réserver</button>
+                <button class="btn btn-secondary mr-1" type="reset" (click)="onReset()">Réinitialiser</button>
+                <button class="btn btn-secondary" type="button" (click)="onClear()">Effacer</button>
+            </div>
+        </div>
+    </form> -->
+</div>
+
+<div class="container">
+  <form id="contact-form" [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate>
+      <div class="card m-2 shadow">
+          <h5 class="card-header">Contact</h5>
+          <div class="card-body" formGroupName="personalData" novalidate>
+
+              <label class="form-control label">Email</label>
+              <input formControlName="email" class="form-control"/>
+
+              <label class="form-control label">Téléphone</label>
+              <input formControlName="mobile" class="form-control"/>
+
+              <label class="form-control label">Pays</label>
+                <select formControlName="country" class="form-control">
+                    <option *ngFor="let country of countries" [value]="country">{{country}}</option>
+                </select>
+
+              <label class="form-control label">Type de demande</label>
+              <select formControlName="requestType" class="form-control">
+                <option *ngFor="let requestType of requestTypes" [value]="requestType">{{requestType}}</option>
+              </select>
+
+              <label class="form-control label">Message :</label>
+              <textarea name="" id="" cols="30" rows="6" formControlName="text" class="form-control shadow"></textarea>
+
+          </div>
+          <div class="card-footer text-center">
+            <button class="btn btn-primary mr-1" type="submit" [disabled]="contactForm.pristine">Envoyer</button>
+            <button class="btn btn-outline-secondary mr-1" type="reset" (click)="revert()" [disabled]="contactForm.pristine">Recommencer</button>
+          </div>
+      </div>
+  </form>
+</div>
