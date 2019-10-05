@@ -1,50 +1,111 @@
 <div class="container">
 
-  <form id="event-form" [formGroup]="EventForm" (ngSubmit)="onSubmit()">
-      <div class="card m-2 shadow">
-          <h5 class="card-header">Réservation</h5>
-          <div class="card-body">
-              <div class="form-row">
-                  <div class="form-group">
-                      <label>Nombre de ticket(s)</label>
-                      <select formControlName="numberOfTickets" class="form-control" (change)="onChangeTickets($event)" [ngClass]="{ 'is-invalid': submitted && f.numberOfTickets.errors }">
-                          <option value=""></option>
-                          <option *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">{{i}}</option>
-                      </select>
-                      <div *ngIf="submitted && !!f.numberOfTickets.errors" class="invalid-feedback">
-                          <div *ngIf="!!f.numberOfTickets.errors.required">Le nombre de ticket(s) requis</div>
-                      </div>
-                  </div>
-              </div>
+  <div class="row events-container">
+
+    <div class="pagination-container">
+      <app-paginate
+        (paginate)="paginateParent($event)"
+        [perPage]="perPage">
+      </app-paginate>
+    </div>
+
+    <div id="event-container" class="container row">
+      <div class="event-card shadow p-3 mb-5 col-sm-8 bg-white rounded" *ngFor="let event of events;">
+        <div class="row no-gutters">
+          <div class="col-md-4 card-image">
+            <img src="{{event.coverUrl}}" class=" card-img card-img-oveerlay overlay h-100" alt="...">
           </div>
-          <div *ngFor="let ticket of t.controls; let i = index" class="list-group list-group-flush">
-              <div class="list-group-item">
-                  <h5 class="card-title">Ticket n° {{i + 1}}</h5>
-                  <div [formGroup]="ticket" class="form-row">
-                      <div class="form-group col-6">
-                          <label>Nom</label>
-                          <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && ticket.controls.name.errors }" />
-                          <div *ngIf="submitted && !!ticket.controls.name.errors" class="invalid-feedback">
-                              <div *ngIf="!!ticket.controls.name.errors.required">Le nom requis</div>
-                          </div>
-                      </div>
-                      <div class="form-group col-6">
-                          <label>Email</label>
-                          <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && ticket.controls.email.errors }" />
-                          <div *ngIf="submitted && !!ticket.controls.email.errors" class="invalid-feedback">
-                              <div *ngIf="!!ticket.controls.email.errors.required">L'email est requis</div>
-                              <div *ngIf="!!ticket.controls.email.errors.email">L'email doit être une adresse email valide</div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+          <div class="col-md-8">
+            <div class="event-card-body">
+              <h5 class="card-title">
+                {{event.name}}
+
+              </h5>
+              <p class="card-text"><small class="text-muted">{{event.startDate}}</small></p>
+              <p class="card-text">{{event.description | slice:0:105}}...</p>
+              <p></p>
+            </div>
+            <button class="event-btn btn-sm btn-dark" (click)="onSelect(event)">Details</button>
           </div>
-          <div class="card-footer text-center">
-              <button class="btn btn-primary mr-1">Réserver</button>
-              <button class="btn btn-outline-secondary mr-1" type="reset" (click)="onReset()">Réinitialiser</button>
-              <button class="btn btn-outline-secondary mr-1" type="button" (click)="onClear()">Effacer</button>
-          </div>
+        </div>
+        <ul *ngIf="event.tags" class="list-inline">
+          <li class="list-inline-item" *ngFor="let tag of event.tags">
+            <span class="badge badge-info">{{ tag }}</span>
+          </li>
+        </ul>
       </div>
+      <div class="col-sm-4 events-informations">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui culpa eum magni, tempore iure necessitatibus
+          quas mollitia corrupti voluptatum, sequi exercitationem iusto, quidem perferendis quis dolore autem dolor
+          praesentium nisi.</p>
+      </div>
+    </div>
+
+    <div class="row pagination-container">
+      <app-paginate
+        (paginate)="paginateParent($event)"
+        [perPage]="perPage">
+      </app-paginate>
+    </div>
+
+    <div class="col-sm-12">
+      <app-event-details
+        [event]="selectedEvent"
+        (reload)="relaodParent($event)">
+      </app-event-details>
+    </div>
+
+  </div>
+
+
+  <form id="event-form" [formGroup]="EventForm" (ngSubmit)="onSubmit()">
+    <div class="card m-2 shadow">
+      <h5 class="event-form-card-header">Réservation</h5>
+      <div class="card-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nombre de ticket(s)</label>
+            <select formControlName="numberOfTickets" class="form-control" (change)="onChangeTickets($event)"
+              [ngClass]="{ 'is-invalid': submitted && f.numberOfTickets.errors }">
+              <option value=""></option>
+              <option *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">{{i}}</option>
+            </select>
+            <div *ngIf="submitted && !!f.numberOfTickets.errors" class="invalid-feedback">
+              <div *ngIf="!!f.numberOfTickets.errors.required">Le nombre de ticket(s) requis</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngFor="let ticket of t.controls; let i = index" class="list-group list-group-flush">
+        <div class="list-group-item">
+          <h5 class="card-title">Ticket n° {{i + 1}}</h5>
+          <div [formGroup]="ticket" class="form-row">
+            <div class="form-group col-6">
+              <label>Nom</label>
+              <input type="text" formControlName="name" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && ticket.controls.name.errors }" />
+              <div *ngIf="submitted && !!ticket.controls.name.errors" class="invalid-feedback">
+                <div *ngIf="!!ticket.controls.name.errors.required">Le nom requis</div>
+              </div>
+            </div>
+            <div class="form-group col-6">
+              <label>Email</label>
+              <input type="text" formControlName="email" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && ticket.controls.email.errors }" />
+              <div *ngIf="submitted && !!ticket.controls.email.errors" class="invalid-feedback">
+                <div *ngIf="!!ticket.controls.email.errors.required">L'email est requis</div>
+                <div *ngIf="!!ticket.controls.email.errors.email">L'email doit être une adresse email valide</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="event-form-card-footer text-center">
+        <button class="btn btn-primary mr-1">Réserver</button>
+        <button class="btn btn-outline-secondary mr-1" type="reset" (click)="onReset()">Réinitialiser</button>
+        <button class="btn btn-outline-secondary mr-1" type="button" (click)="onClear()">Effacer</button>
+      </div>
+    </div>
   </form>
 
 </div>

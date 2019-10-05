@@ -13,6 +13,8 @@ import { CoverComponent } from './components/cover/cover.component';
 import { EventComponent } from './components/event/event.component';
 import { PartnerComponent } from './components/partner/partner.component';
 import { ShopComponent } from './components/shop/shop.component';
+import { PaginateComponent } from './components/paginate/paginate.component';
+import { EventDetailsComponent } from './components/event-details/event-details.component';
 
 const routes: Routes = [
   {
@@ -47,7 +49,9 @@ const routes: Routes = [
     CoverComponent,
     EventComponent,
     PartnerComponent,
-    ShopComponent
+    ShopComponent,
+    PaginateComponent,
+    EventDetailsComponent
   ],
   imports: [
     BrowserModule,
