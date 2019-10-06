@@ -9,9 +9,10 @@
 
 .card-container {
   display: flex;
-  flex-wrap: wrap;
+  // flex-wrap: wrap;
   justify-content: center;
-  margin-top: 16px;
+  margin-top: 5px;
+  padding-left: 10%;
 }
 
 a,
@@ -46,7 +47,6 @@ a:hover {
 }
 
 footer {
-  display: flex;
   align-items: center;
   line-height: 15px;
   position: fixed;
@@ -55,10 +55,12 @@ footer {
   background-color: lightgray;
   width: 100%;
   margin-top: 10px;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 footer a {
-  display: flex;
+  // display: flex;
   align-items: center;
 }
 
@@ -69,3 +71,13 @@ svg#clouds {
   z-index: -10;
   width: 100%;
 }
+
+.admin {
+  padding-left: 3%;
+  padding-top: 0.5%;
+}
+.admin a {
+  color: white;
+}
+
+

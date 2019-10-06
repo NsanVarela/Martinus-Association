@@ -15,6 +15,8 @@ import { PartnerComponent } from './components/partner/partner.component';
 import { ShopComponent } from './components/shop/shop.component';
 import { PaginateComponent } from './components/paginate/paginate.component';
 import { EventDetailsComponent } from './components/event-details/event-details.component';
+import { AdminModule } from './admin/admin.module';
+import { LoginComponent } from './admin/login/login.component';
 
 const routes: Routes = [
   {
@@ -36,6 +38,10 @@ const routes: Routes = [
   {
     path: `contact`,
     component: ContactComponent
+  },
+  {
+    path: `admin`,
+    component: LoginComponent
   }
 ];
 
@@ -51,7 +57,8 @@ const routes: Routes = [
     PartnerComponent,
     ShopComponent,
     PaginateComponent,
-    EventDetailsComponent
+    EventDetailsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
